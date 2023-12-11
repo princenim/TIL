@@ -17,6 +17,7 @@
 - [시간복잡도,공간복잡도](https://github.com/princenim/TIL/blob/master/Algorithm/%EC%8B%9C%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84%2C%EA%B3%B5%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84.md) 
 - [정렬 알고리즘](https://github.com/princenim/TIL/blob/master/Algorithm/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 - [이진탐색](https://github.com/princenim/TIL/blob/master/Algorithm/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89.md)
+- [그리디 알고리즘](https://github.com/princenim/TIL/blob/master/Algorithm/%EA%B7%B8%EB%A6%AC%EB%94%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 
 ## Web
 - [OAuth 2.0](https://github.com/princenim/TIL/blob/master/Web/OAuth%202.0.md)
