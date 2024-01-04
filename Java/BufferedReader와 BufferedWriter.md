@@ -25,7 +25,7 @@ int n = Integer.parseInt(br.readLine()); //리턴타입이 string이기 때문�
 
 또한 BufferedReader는 예외처리 **IOException**를 꼭 해줘야한다.
 
-## 1. 2 BufferedWriter
+## 1.2 BufferedWriter
 
 `System.out.println()` 처럼 문자열을 출력하는 클래스이다.
 
@@ -43,7 +43,7 @@ bw.close();; //닫음.
 - `flush()` : 버퍼에 잔류하는 문자열을 모두 출력한다. 버퍼를 비우는 역할
 - `close()`: 사용한 시스템 자원을 반납하고 출력 스트림을 닫는다. 출력스트림을 더 이상 사용하지 않을 경우에 호출한다.
 
-## 2. **BufferReader가 Scanner보다 빠른 이유**
+## 1.3 BufferedReader가 Scanner보다 빠른 이유
 
 버퍼를 사용하면 더 느릴것 같지만 더 빠르다. 그 이유는 하드디스크는 원래 속도가 느린데 하드디스크 뿐만 아니라 키보드나 모니터와 같은 외부 장치와의 데이터 입출력은 시간이 많이 걸린다. 따라서 키보드를 누를때마다 문자의 정보를 바로 입력 및 출력시키는 것보다 중간에 버퍼를 통해 한번에 이동시키는 것이 빠르다.
 
