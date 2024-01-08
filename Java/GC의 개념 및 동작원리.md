@@ -44,20 +44,18 @@ Young 영역에서 reachable한 상태를 유지해 살아남은 객체가 복�
 
 Young 영역과 Old 영역은 위의 그림으로 보듯이 서로 다른 메모리 구조를 가지고 있다. 세부적인 동작은 다르지만 하지만 기본적으로 다음과 같은 GC의 공통적인 단계를 가진다.
 
-### Stop the World
+### 3.1 Stop the World & Mark the Sweep
 
-Stop the world는 이름처럼 GC를 실행하기 위해서 GC를 실행하는 쓰레드를 제외한 모든 쓰레드의 작업을 멈추는 것을 말한다. 그리고 쓰레드의 작업이 멈추면 어플리케이션도 멈추기 때문에 GC의 성능 개선을 위해 튜닝을 한다고 하면 보통 Stop the world의 시간을 줄이는 작업을 말한다.
+`Stop the world`는 이름처럼 GC를 실행하기 위해서 GC를 실행하는 쓰레드를 제외한 모든 쓰레드의 작업을 멈추는 것을 말한다. 그리고 쓰레드의 작업이 멈추면 어플리케이션도 멈추기 때문에 GC의 성능 개선을 위해 튜닝을 한다고 하면 보통 Stop the world의 시간을 줄이는 작업을 말한다.
 
-### Mark the Sweep
-
-Mark the Sweep 은 Stop the World 로 쓰레드의 작업을 중단시키면 이제 모든 변수와 Reachable 객체를 스캔하면서 각각 어떤 객체를 참조하고 있는지 확인한다. 그리고 사용되지 않는 메모리를 구별해 (= Mark), 메모리에서 제거한다(= Sweep).
+`Mark the Sweep` 은 Stop the World 로 쓰레드의 작업을 중단시키면 이제 모든 변수와 Reachable 객체를 스캔하면서 각각 어떤 객체를 참조하고 있는지 확인한다. 그리고 사용되지 않는 메모리를 구별해 (= Mark), 메모리에서 제거한다(= Sweep).
 
 - **Mark** : 사용되는 메모리와 그렇지 않는 메모리를 구별하는 작업. 어플리케이션이 일시 중지되면 GC는 참조되고 있는 객체와 연결된 객체를 타고 이동하며 접근 가능한 객체를 식별한다.
 - **Sweep** :사용되지 않는 메모리를 해제하는 작업
 
 ![다운로드](https://github.com/princenim/TIL/assets/59499600/15e59cf9-b7f0-4346-a475-f7b152546e73)
 
-### Minor GC
+### 3.2 Minor GC
 
 
   <img width="739" alt="gcgc" src="https://github.com/princenim/TIL/assets/59499600/ed501afb-5c45-40e4-b25a-d7758871b9b2">
@@ -67,17 +65,17 @@ Mark the Sweep 은 Stop the World 로 쓰레드의 작업을 중단시키면 이
 - **Eden :** new 를 통해 새로 생성된 객체가 위치한다. 정기적인 GC후 살아남은 객체는 Survivor영역으로 이동한다.
 - **Survivor 0 / Survivor 1 :** 최소 1번 이상 살아남은 객체가 존재하는 영역이다.
 
-1. 객체가 처음 생성되면 eden 영역으로 객체가 생성된다.
-2.  Eden 영역이 꽉 차면 Minor GC가 실행한다. Mark 동작을 통해 reachable 객체를 탐색한다. 이때 살아남은 객체를 Survivor1에 이동한다. 이때 더 이상 사용되지 않는 메모리는 해제된다.(Sweep)
+1. 객체가 처음 생성되면 `eden` 영역으로 객체가 생성된다.
+2.  `Eden` 영역이 꽉 차면 Minor GC가 실행한다. Mark 동작을 통해 reachable 객체를 탐색한다. 이때 살아남은 객체를 Survivor1에 이동한다. 이때 더 이상 사용되지 않는 메모리는 해제된다.(Sweep)
 3. 살아남은 모든 객체들은 age 값 1이 증가한다.
-4. 또 다시 Eden 영역에 신규 객체들이 꽉차면 Minor GC가 발생한다.
-5. 다시 Eden  영역이 꽉찼을 때 Minor GC가 발생하며 살아남은 객체와 기존 Survivor1에 있던 객체들을 Survivor2로 이동시키고, Survivor1과 Eden 영역을 초기화시킨다.
-6. Survivor1 영역이 꽉 차면 살아남은 객체는 Survivor2 영역으로 이동한다. Survivor둘중 한공간은 반드시 빈 상태가 되야한다. 이때 두 Survivor 영역 중 1개는 항상 사용량이 0을 유지해야한다.
-7. 그리고 이 과정을 반복해 임계값이 다다른  객체는 Old 영역으로 이동한다. 이를 **Promotio**n이라고 한다.
+4. 또 다시 `Eden` 영역에 신규 객체들이 꽉차면 Minor GC가 발생한다.
+5. 다시 Eden  영역이 꽉찼을 때 Minor GC가 발생하며 살아남은 객체와 기존 `Survivor1`에 있던 객체들을 `Survivor2`로 이동시키고, Survivor1과 Eden 영역을 초기화시킨다.
+6. `Survivor1` 영역이 꽉 차면 살아남은 객체는 `Survivor2` 영역으로 이동한다. `Survivor`둘 중 한공간은 반드시 빈 상태가 되야한다. 이때 두 `Survivor` 영역 중 1개는 항상 사용량이 0을 유지해야한다.
+7. 그리고 이 과정을 반복해 임계값이 다다른  객체는 `Old 영역`으로 이동한다. 이를 **Promotio**n이라고 한다.
 
-여기서 **age 값**이란 Survivor 영역에서 객체가 살아남은 횟수를 의미하며 Object Header에 기록된다. 만약 이 age값이 임계값이 다다르면 Old 영역으로 이동한다. 기본 임계값은 31이다.
+여기서 **age 값**이란 `Survivor` 영역에서 객체가 살아남은 횟수를 의미하며 Object Header에 기록된다. 만약 이 age값이 임계값이 다다르면 Old 영역으로 이동한다. 기본 임계값은 31이다.
 
-### Major GC
+### 3.3 Major GC
 
 major GC는 old 영역이 꽉차 더 메모리가 부족해지면 발생한다. Young 영역은 일반적으로 Old 영역보다 크기자 작아서 GC가 보통 0.5초에서 1초 사이에 끝난다. 그래서 자바 어플리케이션에 크게 영향을 주지 않는다. 하지만 Old영역에는 Young 영역 보다 크기 때문에 Minor GC보다 시간이 오래 걸린다.
 
