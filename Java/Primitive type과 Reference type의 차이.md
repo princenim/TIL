@@ -1,4 +1,4 @@
-# 1. Primitive type 과 reference type
+# 1. Primitive type 과 reference type 의 차이 
 
 자바에는 크게 Primitive type 과 reference type가 있다.
 
@@ -18,12 +18,12 @@
 
 ## 1.3 Primitive type 과 reference type의 차이
 
-1. 실제 데이터 값 저장 위치
+1. **실제 데이터 값 저장 위치**
 
 **기본형은 데이터가 Stack에  저장된다.**
 **참조자료형은 실제 데이터값은 Heap에 변수는 Stack에 저장되어 변수 공간에 Heap에 값이 저장된 메모리 주소값을 저장한다.**
 
-1. **null을 담을 수 있는가**
+2. **null을 담을 수 있는가**
 
 기본 자료형은 null을 담을 수 없고, 참조 자료형은 null을 담을 수 있다.
 
@@ -32,7 +32,7 @@ int i = null; //불가능
 Integer integer = null // 가능
 ```
 
-1. 제네릭 타입에서 사용 여부
+3. 제네릭 타입에서 사용 여부
 
 기본 타입은 제네릭 타입에서 사용할 수 없지만, 참조 자료형은 가능하다 .
 
