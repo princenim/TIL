@@ -9,6 +9,7 @@
 - [GC의 개념 및 동작원리](https://github.com/princenim/TIL/blob/master/Java/GC%EC%9D%98%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC.md)
 - [Primitive type과 Reference type의 차이](https://github.com/princenim/TIL/blob/master/Java/Primitive%20type%EA%B3%BC%20Reference%20type%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
 - [String literal 과 String object의 차이](https://github.com/princenim/TIL/blob/master/Java/String%20literal%EA%B3%BC%20String%20object%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
+- [메모리 누수와 static](https://github.com/princenim/TIL/blob/master/Java/%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EB%88%84%EC%88%98%EC%99%80%20Static.md)
 
 ### 자바의 정석 
 - [1장. 자바](https://github.com/princenim/TIL/blob/master/Java/%EC%9E%90%EB%B0%94%EC%9D%98%EC%A0%95%EC%84%9D/Ch01/Ch01.%EC%9E%90%EB%B0%94.md)
