@@ -6,7 +6,7 @@
 - [BufferedReader & BufferedWriter](https://github.com/princenim/TIL/blob/master/Java/BufferedReader%EC%99%80%20BufferedWriter.md)
 - [== 와 equals()의 차이](https://github.com/princenim/TIL/blob/master/Java/%3D%3D%EC%99%80%20equals()%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
 - [JVM 구조와 자바의 실행방식](https://github.com/princenim/TIL/blob/master/Java/JVM%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%9E%90%EB%B0%94%EC%9D%98%20%EC%8B%A4%ED%96%89%EB%B0%A9%EC%8B%9D.md)
-- [GC의 개념 및 동작원리](https://github.com/princenim/TIL/blob/master/Java/GC(Garbage%20Collection)%EC%9D%98%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC.md)
+- [GC의 개념 및 동작원리](https://github.com/princenim/TIL/blob/master/Java/GC%EC%9D%98%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC.md)
 
 ### 자바의 정석 
 - [1장. 자바](https://github.com/princenim/TIL/blob/master/Java/%EC%9E%90%EB%B0%94%EC%9D%98%EC%A0%95%EC%84%9D/Ch01/Ch01.%EC%9E%90%EB%B0%94.md)
