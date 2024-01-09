@@ -23,7 +23,7 @@
 
 ## ✔️Network
 - [프록시 서버](https://github.com/princenim/TIL/blob/master/Network/Proxy%20Server.md)
-- [[README.md](README.md)SSH](https://github.com/princenim/TIL/blob/master/Network/SSH.md)
+- [SSH](https://github.com/princenim/TIL/blob/master/Network/SSH.md)
 - [hosts 파일](https://github.com/princenim/TIL/blob/master/Network/hosts%20%ED%8C%8C%EC%9D%BC.md)
 - [루프백 IP](https://github.com/princenim/TIL/blob/master/Network/%EB%A3%A8%ED%94%84%EB%B0%B1%20IP%20127.0.0.1.md)
 
