@@ -75,6 +75,18 @@ Young 영역과 Old 영역은 위의 그림으로 보듯이 서로 다른 메모
 
 여기서 **age 값**이란 `Survivor` 영역에서 객체가 살아남은 횟수를 의미하며 Object Header에 기록된다. 만약 이 age값이 임계값이 다다르면 Old 영역으로 이동한다. 기본 임계값은 31이다.
 
+### **Gc 과정에서 왜 survivor 한곳을 비워야할까?**
+
+> `You must be wondering why do we have 2 survivor space. We have 2 survivor spaces to avoid memory fragmentation. Each time you copy objects from eden to survivor and you get empty eden space and 1 empty survivor space.`
+>
+
+gc가 일어나 `eden`이나 `survivor` 영역에 객체가 제거되면 파편화된 메모리 영역이 존재하게 되는데 이를 한 영역에 모아놔서 **순차읽기/쓰기**를 하려고 한곳을 비운다.
+이는 ‘디스크 조각 모음’과 비슷하다고 보면 된다.  하드 디스크에 파일 저장시에 이곳 저곳에 흩어져서 저장되는 것을 **단편화(fragmentation)** 라고 하는데 그리고 이 단편화가 발생한 디스크들을 한 덩어리로 모아 재배치해주는게 **디스크 조각 모음** 이다.  이렇게 디스크 조각 모음을 하게 되면 순차읽기/쓰기를 하게 되어 속도가 빨라지게 된다.
+
+따라서 gc가 일어날때 `survivor`의 한 곳에 모으는 이유도 더 빠르게 성능을 위함이며, 이러한 점이 결국 메모리 관리를 하지 않아도 되는 자바의 장점이기도 하다.
+
+(추가로 보통 하드디스크에서 ‘삭제’라는 작업은 매우 비용이 높은 작업이다. 따라서 연속된 메모리에서 중간에 값이 데이터상으로 삭제되었을 때 실제 메모리의 값을 삭제하지않고, 다른곳에서 이곳이 사용되지 않고있다고 체크하고 다음에 사용할때 체크한 곳을  보통 덮어씌우는 방식을 사용한다. )
+
 ### 3.3 Major GC
 
 major GC는 old 영역이 꽉차 더 메모리가 부족해지면 발생한다. Young 영역은 일반적으로 Old 영역보다 크기자 작아서 GC가 보통 0.5초에서 1초 사이에 끝난다. 그래서 자바 어플리케이션에 크게 영향을 주지 않는다. 하지만 Old영역에는 Young 영역 보다 크기 때문에 Minor GC보다 시간이 오래 걸린다.
