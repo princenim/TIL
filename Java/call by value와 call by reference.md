@@ -47,11 +47,9 @@ public class PrimitiveTypeTest {
 <img width="951" alt="스크린샷 2024-01-11 오후 3 48 40" src="https://github.com/princenim/TIL/assets/59499600/fd352480-6737-454e-b6fc-fe0e17944783">
 
 
-1) int형 변수 a를 생성
-
-2) change 메소드를 호출. 이 때 stack 영역에 스택프레임이 생기고 메소드의 매개변수 a가 생성 그리고 a의 값이 복사되어 매개변수 a에 전달된다.
-
-3)  change 메소드의 변수 a의 값을 3으로 변경. 그리고 이 change 메소드가 종료되면 해당 스택프레임은 메모리에서 사라진다.
+1) int형 변수 `a`를 생성
+2) `change` 메소드를 호출. 이 때 `stack` 영역에 스택프레임이 생기고 메소드의 매개변수 `a`가 생성 그리고 `a`의 값이 복사되어 매개변수 `a`에 전달된다.
+3)  `change` 메소드의 변수 `a`의 값을 3으로 변경. 그리고 이 `change` 메소드가 종료되면 해당 스택프레임은 메모리에서 사라진다.
 
 **즉, 원시타입의 전달은 값만 전달하는 Call by Value이다.**
 
@@ -90,12 +88,48 @@ public class ReferenceTypeTest {
 
 ![알고리즘-11 2](https://github.com/princenim/TIL/assets/59499600/c3420f70-cb24-4612-9b24-6509d18a50de)
 
-1) 객체 a와 b를 생성
+1) 객체 `a`와 `b`를 생성
+2) `change` 메소드가 호출되어 `stack` 영역에 스택프레임이 생기고, 매개변수가 참조형이니 **참조변수의 값**(주소)을 매개변수 `a`와 `b`로 복사해서 전달
+3) `change` 메소드에서 `a`의 `age`값을 1늘리고, 새로운 객체를 생성 그리고 이 새로운 객체의 주소값을 `change`의 변수 `b`가 참조하도록 한다.
+이렇게 `change` 메소드의 호출이 끝나면 스택프레임이 사라지고 결국 main의 변수 `a`,`b`의 값은 11과 20으로 나온다 .
 
-2) change 메소드가 호출되어 stack 영역에 스택프레임이 생기고, 매개변수가 참조형이니 **참조변수의 값**(주소)을 매개변수 a와 b로 복사해서 전달
+또 다른 참조 타입 전달의 예이다.
 
-3) change 메소드에서 a의 age 값을 1 늘리고, 새로운 객체를 생성 그리고 이 새로운 객체의 주소값을 change의 변수 b가 참조하도록 한다.
+```java
+class Person{
+    int age;
+}
 
-이렇게 change 메소드의 호출이 끝나면 스택프레임이 사라지고 결국 main의 변수 a,b의 값은 11과 20으로 나온다 .
+public class ReferenceTypeTest2 {
+    public static void main(String[] args) {
+        Person p = new Person();
+        p.age= 10;
+
+        System.out.println(p.age); //10
+
+        test(p); //값 변경
+
+        System.out.println(p.age);
+        System.out.println(p);
+
+    }
+
+    public static void test(Person p){ //참조변수의 전달- 참조변수 d의 값(주소)가 매개변수 d에 복사, 주소가 아니라 참조의 값이라고 생각하기
+
+        p.age = 15;
+				p =  null;
+    }
+}
+```
+
+![알고리즘-12](https://github.com/princenim/TIL/assets/59499600/9f0481d4-b28c-41cb-a5dc-3efb86c9d0c4)
+
+1) 객체 `p` 생성
+
+2) `change` 메소드가 호출되어 `stack` 영역에 스택프레임이 생기고, 매개변수가 참조형이니 **참조변수의 값**(주소)을 매개변수 `p`이 복사되어 전달된다.
+
+3) `change` 메소드에서 `a`의 `age` 값을 15로 변경하고, `change`메소드의 변수 `p`에 null 값을 넣는다. 따라서
+
+이렇게 `change` 메소드의 호출이 끝나면 스택프레임이 사라지고 `p`의 `age` 값은 15로 출력된다.
 
 즉, 다시말해 자바에서 **참조자료형에서 주소값를 전달하는 것처럼 보여 `call by reference` 처럼 보이지만 주소값!을 넘기는 게 아니라 실제로는 주소값을 가지고 있는 참조 자체를 넘기기 때문에  call by value라고 볼 수 있다.**
