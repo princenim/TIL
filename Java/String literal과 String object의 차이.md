@@ -55,6 +55,22 @@ public native String intern();
 
 여기서 `native`란 자바 프로그램에서 다른 언어로 작성된 코드를 실행할 수 있는 JNI(Java Native Interface)키워드이다.
 
+
+## 1.4  스트링 리터럴의 존재 이유
+
+일단 둘다 불변 객체이다. 따라서 이 불변객체의 단점을 수정하려고 만든게 `stringbuffer`, `stringbuilder`이다.
+그전에 string 객체가 존재하는데 스트링 리터럴을 사용해야하는 이유가 무엇일까?
+
+> **Q :  Why java uses the concept of string literal?**
+>
+
+> A : `String literal concept is used to make Java more memory efficient. As multiple references can point to one value in string pool and no new object will be created if it already exist in string constant pool.`
+>
+
+첫번째로 스트링 리터럴이 생긴 이유는 **메모리의 효율성**을 높이기 위해서이다. 리터럴을 사용하면 같은 데이터 값(= contents)은 string pool 내에서 있는 같은 주소를 바라보기 때문에 메모리의 낭비를 막을 수 있다.
+
+만약 new로  스트링 객체를 만든다면 같은 값이라도 다른 주소를 갖는 스트링이 만들어지기때문에 **리터럴을 사용하는것이 훨씬 메모리 효율성이 좋다.**
+
 # 2. == 과 equals
 
 먼저 ==는 기본 자료형에는 값을비교, 참조자료형에서는 객체의 주소값을 비교한다. 따라서 참조자료형의 값을 비교하려면 equals()를  오버라이딩을 해서 사용해야한다.
