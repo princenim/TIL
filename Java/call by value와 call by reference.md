@@ -125,11 +125,8 @@ public class ReferenceTypeTest2 {
 ![알고리즘-12](https://github.com/princenim/TIL/assets/59499600/9f0481d4-b28c-41cb-a5dc-3efb86c9d0c4)
 
 1) 객체 `p` 생성
-
 2) `change` 메소드가 호출되어 `stack` 영역에 스택프레임이 생기고, 매개변수가 참조형이니 **참조변수의 값**(주소)을 매개변수 `p`이 복사되어 전달된다.
-
 3) `change` 메소드에서 `a`의 `age` 값을 15로 변경하고, `change`메소드의 변수 `p`에 null 값을 넣는다. 따라서
-
 이렇게 `change` 메소드의 호출이 끝나면 스택프레임이 사라지고 `p`의 `age` 값은 15로 출력된다.
 
 즉, 다시말해 자바에서 **참조자료형에서 주소값를 전달하는 것처럼 보여 `call by reference` 처럼 보이지만 주소값!을 넘기는 게 아니라 실제로는 주소값을 가지고 있는 참조 자체를 넘기기 때문에  call by value라고 볼 수 있다.**
