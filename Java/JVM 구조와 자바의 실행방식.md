@@ -135,6 +135,8 @@ Stack 자료구조는 **Last in First Out** 구조로 마지막에 들어온 값
 
 
 
+
+
 ### 3. Native Method Stack
 
 ![native](https://github.com/princenim/TIL/assets/59499600/c3e08855-4d8d-4f32-868e-3bb626344045)
