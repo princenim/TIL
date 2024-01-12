@@ -92,7 +92,7 @@ Young 영역과 Old 영역은 위의 그림으로 보듯이 서로 다른 메모
 
 여기서 **age 값**이란 `Survivor` 영역에서 객체가 살아남은 횟수를 의미하며 Object Header에 기록된다. 만약 이 age값이 임계값이 다다르면 Old 영역으로 이동한다. 기본 임계값은 31이다.
 
-### **gc 과정에서 왜 survivor 한곳을 비워야할까?**
+### **GC 과정에서 왜 survivor 한곳을 비워야할까?**
 
 > `You must be wondering why do we have 2 survivor space. We have 2 survivor spaces to avoid memory fragmentation. Each time you copy objects from eden to survivor and you get empty eden space and 1 empty survivor space.`
 >
@@ -145,26 +145,49 @@ parallel Old GC는 parallel GC의 Old GC를 개선해 멀티쓰레드로 업그�
 
 ![cms gc](https://github.com/princenim/TIL/assets/59499600/15425b37-1209-49c0-89f2-45a5a1f77158)
 
-CMS GC는 GC 과정을 어플리케이션 쓰레드와 동시에(Concurrently) 수행함으로 Stop the World 시간을 최소화하기위해서 고안된 방식이다.  Compact 과정이 사라졌으며 다음과 같은 단계를 거친다.
+CMS GC는 GC 과정을 어플리케이션 쓰레드와 **동시에(Concurrently)** 수행함으로 **Stop the World 시간을 최소화하기위해서 고안된 방식이다**. parallel GC 에서  Compact 과정이 사라진 것이 가장 큰 차이점이며 `reachable` 객체를 한번에 찾지 않고 나눠서 찾는 방식을 사용한다.
 
-1. **Initial Mark (STW 발생)** : Old 영역에 있는 객체중에 GC 루트 객체에서 직접 참조하는 객체 또는 Young 영역의 객체에서 참조하는 객체만 **빠르게** 탐색해 marking 함으로써 Stop the World시간을 최소화한다. .
-2. **Concurrent Mark** : Initial Mark 단계에서 마킹된 객체가 참조하는 객체를 대상으로 살아있는 객체를 추가 확인한다. 이때 어플리케이션 작업과 동시에 수행하므로 Stop the World가 발생하지 않는다**.**
-3. **Remark(STW 발생)** : Concurrent Mark 과정에서 변경된 사항이 없는지 다시 한 번 마킹하며 확인한다.
-4. **Concurrent Sweep** :  접근할수 없는 객체를 제거한다.
+1. **Initial Mark (STW 발생)** : Old 영역에 있는 객체중에 GC 루트 객체에서 직접 참조하는 객체만을 **빠르게** 탐색해 marking 함으로써 Stop the World시간을 최소화한다. .
+2. **Concurrent Mark** **(STW 미발생)**: Initial Mark 단계에서 마킹된 객체가 참조하는 객체를 대상으로 살아있는 객체를 추가 확인한다. 이때 어플리케이션 작업과 동시에 수행하므로 Stop the World가 발생하지 않는다.
+3. **Remark(STW 발생)** : Concurrent Mark 를 수행하면서 다른쓰레드에 의해 새로 추가되거나 참조가 없어진 객체를 확인한다.
+4. **Concurrent Sweep(STW 미발생)** :  접근할수 없는 객체를 제거한다.
 
-여기서 **GC root란**  가비지 컬렉션에는 GC root가 있는데 이는 힙 외부에서 접근할 수 있는 변수나 오브젝트를 말한다. 즉 가비지 컬렉션의 Root라는 의미이다.
+CMS GC는 jdk9부터 deprecated 되었으며 14부터는 완전히 중지되었다.
+
+### GC Root Space
+
+여기서 `GC root`**란** 힙 영역을 참조하는 method area, static 변수, stack, native method stack을 말한다.
+
 
 ## 5.5 G1(Garbage First GC)
 
 ![g1](https://github.com/princenim/TIL/assets/59499600/0188ee15-a439-4d2d-ad7b-11aae76be787)
 
-CMS GC를 개선한 방식으로 Java9 이상의 디폴트 GC이다. 현재 GC중 Stop the World의 시간이 가장 짧다.
 
-G1 GC는 전통적으로 Heap을 `Old`와 `Young`으로 구분하던 방법과는 달리 물리적으로 영역을 구분하지 않는다. 대신 Heap 을 균등한 크기의 **region(영역)** 으로 구분해 논리적으로 구분한다 . 그리고 `eden` , `survivor`, `old`에  `Humonogous`와 `Availabe/Unused`를 역할을 추가했다. `Humonogous`는 region 영역 크기의 50%가 넘은 객체를 저장하는 region, `Availabe/Unused`은 사용되지 않는 region을 의미한다.
+`CMS GC`를 개선한 방식으로 Java9 이상의 디폴트 GC이다. 가비지가 많은 영역을 찾아서 청소한다는 의미로 Garbage First라는 의미를 갖고있다.  `G1 GC` 이전의 GC는 전통적으로 `Heap`을 `Old`와 `Young`으로 구분하여 에러가 났는데 **G1 GC는 물리적으로 영역을 구분하지 않고 대신 Heap 을 균등한 크기의 region(영역) 으로 구분해 논리적으로 구분한다 .**
+
+일반적으로 메모리 크기가 커질수록 수집 대상이 많아져 STW의 시간이 길어질수밖에 없다. 하지만 G1은 작은 영역들로 구성되어있어서 gc가 실행될때마다 전체영역이 아닌 작은 영역으로 이루어져서 stw를 짧게 유지할 수 있다.
+
+또한  `eden` , `survivor`, `old`에  `Humonogous`와 `Availabe/Unused`를 역할을 추가했다. `Humonogous`는 region 영역 크기의 50%가 넘은 객체를 저장하는 region, `Availabe/Unused`은 사용되지 않는 region을 의미한다.
 
 동작방식은 다음과 같다.
 
-- **Minor GC** : 한 지역에 객체를 할당하다가 해당 지역이 꽉 차면 Minor GC가 실행된다. G1 GC는 각 지역을 추적하고 있기 때문에 가비지가 가장 많은 지역을 찾아 Mark And Sweep을 한다. 만약 Eden 지역에서 GC가 수행되면 Mark and Sweep을 하고 살아남은 객체를 다른 지역으로 이동시킨다. 이 지역이 `Availabe/Unused` 면 해당 지역은 `Survivor` 영역이 되고 , `Eden` 지역은 `Availabe/Unused` 이 된다.
-- **Major GC:** 시스템이 계속 운영되다가 객체가 너무 많아 메모리를 회수 할 수 없을 때 Major GC가 발생한다여기서 가장 큰 차이점이 발생하는데 기존의 다른 GC는 모든 Heap 의 `Old` 영역에서 GC가 수행하는데 그에 따라 시간이 오래걸렸다. 하지만 G1 GC는 어디 영역에 가비지가 가장 많은지 알고있기 때문에 해당 영역만 GC를 수행한다.
 
-따라서 G1 GC는 메모리를 일일히 탐색해 객체를 제거하지않고, 가비지가 많은 영역을 먼저 GC하기 때문에 속소가 빠르다. 그리고 이전 GC들은 `Eden` → `Surivivor0` → `Survivor1` 로 순차적으로 이동했지만 G1 GC는 순차적으로 이동하지 않는다. 대신 효율적이라고 생각하는 위치로 객체를 이동시킨다.
+### Minor GC 
+다른 GC와 마찬가지로 `eden` 지역에 객체가 생성되고, gc를 거쳐 살아남은 객체들은 `survivor`지역으로 이동 그리고 기존의 `eden` 지역은 `unused` 로 변경된다.
+
+### Major GC:
+
+![g1 major](https://github.com/princenim/TIL/assets/59499600/03cb81df-203f-4271-a889-2baa2503d6a7)
+
+
+1. **Initial Mark** : Old 영역에 존재하는 객체들이 참조하는 survivor 영역을 찾는다. 이때 STW 발생
+2. **Rooy Region Scan**  : Initial Mark 에 찾는 survivor 영역에 대한 객체 스캔 작업을 한다.
+3. **Concurrent Mark** : 전체 힙 영역에 대한 스캔 작업을 하며 이때 GC 대상 객체가 발견되지 않는 영역은 이후 단계에서 처리하지 않도록한다.
+4. **Remark** : 어플리케이션을 멈추고 최종적으로 GC대상에서 제외될 객체를 식별한다.
+5. **Clean up** : 어플리케이션을 멈추고 **가비지가 가장 많은 영역을 GC를 수행한다.**
+6. **Copy**  : GC 대상 영역이었지만 clean up 과정에서 gc가 수행되지 않는 영역의 살아남은 객체들을 새로운 영역에 복사해 compact 작업을 수행한다.
+
+기존의 다른 GC는 모든 `Heap` 의 `Old` 영역에서 GC가 수행하는데 그에 따라 시간이 오래걸렸다. 하지만 `G1 GC`는 어디 영역에 가비지가 가장 많은지 알고있기 때문에 해당 영역만 GC를 수행한다.
+
+따라서 G1 GC는 일일히 메모리를 `Eden` → `Surivivor0` → `Survivor1` 순서대로 전부 탐색해 객체를 제거하지 않고,  **가비지가 많은 영역을 우선적으로 제거, 그리고  또한 더 효율적이라고 생각하는 위치로 객체를 이동시키기때문에 더 효율적이다.**
