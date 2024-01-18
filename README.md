@@ -12,7 +12,7 @@
 - [메모리 누수와 static](https://github.com/princenim/TIL/blob/master/Java/%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EB%88%84%EC%88%98%EC%99%80%20Static.md)
 - [call by value와 call by reference](https://github.com/princenim/TIL/blob/master/Java/call%20by%20value%EC%99%80%20call%20by%20reference.md)
 - [float와 double의 차이점과 BigDecimal](https://github.com/princenim/TIL/blob/master/Java/float%EC%99%80%20double%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EC%A0%90%EA%B3%BC%20BigDecimal.md)
-- [String은 어떻게 hashCode를 생성할까?](https://github.com/princenim/TIL/blob/master/Java/String%EC%9D%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20hashCode%EB%A5%BC%20%EC%83%9D%EC%84%B1%ED%95%A0%EA%B9%8C.md)
+- [자바의 hashcode는 무엇이고, 어디에 사용할까?](https://github.com/princenim/TIL/blob/master/Java/%EC%9E%90%EB%B0%94%EC%9D%98%20hashcode%EB%8A%94%20%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0%20%2C%20%EC%96%B4%EB%94%94%EC%97%90%20%EC%82%AC%EC%9A%A9%ED%95%A0%EA%B9%8C%3F.md)
 - [try-with-resource](https://github.com/princenim/TIL/blob/master/Java/try-with-resource.md)
 
 ### 자바의 정석 
