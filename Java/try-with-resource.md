@@ -36,8 +36,20 @@ public void tryFinally() {
 위의 코드는 `FileInputStream` 클래스 객체를 생성하고 사용한 뒤 자원을 해제하는 코드이다.
 
 코드를 보면 `finally` 안에 다시 `try-catch`가 들어가 코드가 다시 복잡하게 된다.  따라서 만약에 입출력 처리가 더 많은 프로그램을 작성하면 코드가 더더욱 복잡하게 될것이다. 뿐만 아니라 작업이 번거롭고 , 실수로 자원을 반납하지 못하는 경우가 발생할 수있다.
-
 이런 단점을 해결하려고 나온 `try-with-resource`가 등장했다.
+
+### **catch문에 return 이 존재한다면?**
+
+try-catch-finally 를 실행할때 만약에 catch문에 return 이 존재하면 finally를 실행할까 말까?
+
+실행한다.
+
+> The `finally` block *always* executes when the `try` block exits. This ensures that the `finally` block is executed even if an unexpected exception occurs. But `finally` is useful for more than just exception handling — it allows the programmer to avoid having cleanup code accidentally bypassed by a `return`, `continue`, or `break`.
+>
+
+[The Java™ Tutorials :The finally Block ](https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html)
+
+해당 공식문서에서 찾을 수 있듯이 `return` , `continue`, `break`문이 있어도 무조건 `finally` 문이 실행된다. `System.exit()` 단, 이 문을 실행하면 finally문이 실행되지 않는다.
 
 # 2. try-with-resource
 
