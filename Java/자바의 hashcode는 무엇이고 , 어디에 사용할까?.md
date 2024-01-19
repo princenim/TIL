@@ -60,7 +60,7 @@ public static void main(String[] args) {
 
    1-2. 두 객체의 해시코드 값이 같으면  `equals()`를 통해 한번더 확인한다. . `equals()`는 두 객체의 주소값이 아닌 값을 확인하므로 이때 이 값이 다르면 당연히 다른객체, 값이 같으면 동일 객체로 판단한다.
 
-2.1 equals()와 hashCode()를 같이 오버라이딩 해야 하는 이유
+## 2.1 equals()와 hashCode()를 같이 오버라이딩 해야 하는 이유
 
 ![Hashtable](https://github.com/princenim/TIL/assets/59499600/ccf19a0c-68be-4d2b-a6c1-75cb27db1aec)
 ```java
