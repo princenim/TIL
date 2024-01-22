@@ -33,6 +33,10 @@
 - [hosts 파일](https://github.com/princenim/TIL/blob/master/Network/hosts%20%ED%8C%8C%EC%9D%BC.md)
 - [루프백 IP](https://github.com/princenim/TIL/blob/master/Network/%EB%A3%A8%ED%94%84%EB%B0%B1%20IP%20127.0.0.1.md)
 
+## ✔️운영체제
+- [프로세스와 쓰레드의 차이점](https://github.com/princenim/TIL/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
+
+
 ## ✔️Algorithm 
 - [시간복잡도,공간복잡도](https://github.com/princenim/TIL/blob/master/Algorithm/%EC%8B%9C%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84%2C%EA%B3%B5%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84.md) 
 - [정렬 알고리즘](https://github.com/princenim/TIL/blob/master/Algorithm/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
