@@ -60,7 +60,7 @@ Bucket 3: [Entry4, ...]
 
 (Java 8 이상부터는 일정 크기 이상의 `LinkedList`가 되면 버킷을 `Tree`로 변환한다. )
 
-## 1.2  해싱충돌(Hash Collision)
+# 2. 해싱충돌(Hash Collision)
 
 위의 hashCode() 메소드의 리턴값은 int다. 즉 해시코드의 범위가 정해져있다는 말이다. 객체는 무한대로 생성이 가능한데 객체의 고유한 정수값을 리턴하는 해시값은 무한하지 않다. 즉 다시말해서 **다른 Key값이라도 같은 해시값이 나올 수 있다. 이를 해시 충돌(Hash Collision)이라고 한다.**
 
