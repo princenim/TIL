@@ -16,7 +16,7 @@
 - [try-with-resource](https://github.com/princenim/TIL/blob/master/Java/try-with-resource.md)
 - [로깅 시 System.out.println()을 쓰면 안 되는 이유와 로깅 프레임워크](https://github.com/princenim/TIL/blob/master/Java/%EB%A1%9C%EA%B9%85%20%EC%8B%9C%20System.out.println()%EC%9D%84%20%EC%93%B0%EB%A9%B4%20%EC%95%88%20%EB%90%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0.md)
 - [volatile 키워드](https://github.com/princenim/TIL/blob/master/Java/volatile%20%ED%82%A4%EC%9B%8C%EB%93%9C.md)
-- [ArrayList와 주요 메소드의 시간복잡도 ](https://github.com/princenim/TIL/blob/master/Java/ArrayList%EC%99%80%20%EC%A3%BC%EC%9A%94%20%EB%A9%94%EC%86%8C%EB%93%9C%EC%9D%98%20%EC%8B%9C%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84.md)
+- [ArrayList의 특징과 주요 메소드의 시간복잡도](https://github.com/princenim/TIL/blob/master/Java/ArrayList%EC%9D%98%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EC%A3%BC%EC%9A%94%20%EB%A9%94%EC%86%8C%EB%93%9C%EC%9D%98%20%EC%8B%9C%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84.md)
 - [HashMap은 어떻게 동작할까?](https://github.com/princenim/TIL/blob/master/Java/HashMap%EC%9D%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EB%8F%99%EC%9E%91%ED%95%A0%EA%B9%8C%3F.md)
 
 
