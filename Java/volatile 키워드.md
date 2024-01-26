@@ -13,6 +13,8 @@ volatile boolean suspended = false;
 
 멀티 코어 프로세서에서는 코어가 2개이상이며 각각의 코어는 모두 메모리에서 읽어온 값을 캐시에 저장하고, 값을 읽어서 작업한다. 다시 같은 값을 읽어올때는 캐시에 있는지 확인하고 없을 때만 메모리에서 가져온다. 따라서 메모리에 저장된 변수의 값이 변경되었는데도 캐시에 저장된 값이 갱신되지 않아서 변수의 값이 다른 경우가 발생한다. 이때 `volatile` 를 사용하면 코어가 변수의 값을 읽어올때 캐시가 아닌 메모리에서 읽어오기 때문에 캐시와 메모리 간의 불일치가 해결된다.
 
+즉, `volatile` 키워드를 사용하면 모든 쓰기 작업은 캐시를 건너뛰어 메인 메모리에 적용되며, 모든 읽기작업은 메인 메모리로부터 읽어온다.
+
 # 2. volatile 변수의 특징
 
 ## 2.1 가시성(Visibility) 보장
@@ -79,3 +81,22 @@ volatile double val2; //double 타입의 변수를 원자화
 `synchronized` 블록도 일종의 원자화라고 할 수 있다. `synchronized` 블럭은 여러 문장을 원자화함으로써 쓰레드의 동기화를 구현한 것이다.
 
 여기서 중요한 점은 `volatile` 은 변수의 읽기나 쓰기를 원자화할 뿐 동기화 하는것은 아니다.
+
+## 2.3  Happens Before guarantee
+
+`volaite` 키워드는 가시성 보장과 동시에 `happens-before` 를 보장한다.
+
+1. **volatile 키워드가 있는 변수를 만나면 그 전의 모든 변수를 메모리의 값으로 업데이트한다.**
+
+> `It Thread A writes to a volatile variable and Thread B subsequently reads the same volatile variable, then all variables visible to Thread A before writing the volatile variable, will also be visible to Thread B after it has read the volatile variable.`
+>
+
+
+
+한 쓰레드가 `volatie` 변수를 수정할 때 단지 해당 변수만을 메인 메모리로 저장하는 것이 아니라. 이 쓰레드가 `volatile` **변수를 수정하기 전에 수정한 모든 변수들도 함께 메인 메모리에 저장된다.** 그리고 한 쓰레드가 `volitile` 변수를 메인 메모리에서 읽을 때 `volitile` 변수를 수정하면서 메인 메모리로 함께 저장된 다른 모든 변수들도 메인 메모리로부터 함께 읽어진다. 따라서 마지막 변수에 `volatie`을 사용하면 이전 변수도 최신값으로 업데이트되는 것이 보장된다.
+2. **volatile 사용 이전까지는 코드를 순서대로 실행함을 보장한다.**
+
+> `The reading and writing instructions of volatile variables cannot be reordered by the JVM (the JVM may reorder instructions for performance reasons as long as the JVM detects no change in program behaviour from the reordering). Instructions before and after can be reordered, but the volatile read or write cannot be mixed with these instructions. Whatever instructions follow a read or write of a volatile variable are guaranteed to happen after the read or write`
+>
+
+CPU는 성능을 향상 시키기 위해 임의로 코드의 순서를 재배치(reorder)한다. 이런 재배치가 변수를 공유하는 멀티 쓰레드 환경에서는 데이터 정합성에 문제를 일으킬 수 있다. `volatile` 키워드를 사용하면 `volatile` 사용 이전까지는 코드를 순서대로 실행함을 보장한다.
