@@ -131,6 +131,16 @@ PC register은 Thread가 생성될 때마다 생기는 공간으로 현재 ‘**
 
 프로그램에서 실행과정에서 임시로 할당되었다가 메소드를 빠져나가면 바로 소멸되는 특성의 데이터를 저장하기 위한 영역이다. Last in First Out 구조로 마지막에 들어온 값이 가장 먼저 나가는 stack 구조로 메소드 호출시 스택 프레임이 생성되고 메소드 안에 정의된 **기본 자료형(primitive type) 에 해당하는 매개변수, 지역변수(local variable), 리턴값을 저장한다.** 그리고 메소드가 호출 범위가 종료되면 스택에서 제거된다. 뿐만 아니라 **Heap 영역에 생성된 객체들을 참조하는 참조변수가 저장된다.**
 
+![stack2](https://github.com/princenim/TIL/assets/59499600/1b03389d-cfc8-49be-8357-365c61e46c62)
+![st3](https://github.com/princenim/TIL/assets/59499600/3361e40d-ce8f-42d5-90f9-34c57a11f1e2)
+
+
+
+stack을 더 자세히 설명하면 stack 영역은 쓰레드가 가지는 독립적인 영역으로 서로 공유할 수 없다. (stack 영역이 쓰레드 별로 나눠있는 구조) 따라서 쓰레드가 생성되고 쓰레드가 작업하는데사용할 호출스택(call stack)이 생기면, 호출 스택에 메소드가 호출될때마다 스택프레임이 생긴다. 그리고 이 스택 프레임안에는  메소드에서 사용할 지역 변수, 연산을 위한 작업공간인 openrand stack , 상수 풀 참조, 리턴 값이 담긴다.
+
+<img width="1007" alt="스크린샷 2024-02-02 오후 4 19 09" src="https://github.com/princenim/TIL/assets/59499600/aebc356c-0d2d-4e49-ac97-ff41d660951b">
+
+
 
 
 
