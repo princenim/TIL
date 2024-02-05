@@ -1,4 +1,4 @@
-# 1. Double-Cheked Locking
+# 1. Double-Checked Locking
 
 ## 1.1 싱글톤 패턴
 
@@ -51,11 +51,11 @@ public class MySingleton {
 ```
 
 하지만 이 방법은 사용하는 쓰레드에 락이 걸려 다른 쓰레드는 락이 풀릴때까지 기다려야하므로 성능저하를 일으킨다.
-이 방법보다 더 좋은 성능을 보장하는 방법이 있다. 바로 `double-checkd locking` 이다. 
+이 방법보다 더 좋은 성능을 보장하는 방법이 있다. 바로 `double-checked locking` 이다. 
 
 ## 1.2 double-checked locking pattern
 
-`Double-Cheked Locking`은 소프트웨어 디자인 패턴 중 하나로 주로 싱글톤 패턴에서 멀티쓰레드 환경에서의 성능을 높이기 위해서 사용되는 방법이다. 이미 초기화된 경우에는 락을 획득하지 않고 바로 반환해하고, 초기화 되지 않은 경우에만 락을 획득해 초기화를 진행하는 방법으로 성능을 높인다.
+`Double-Checked Locking`은 소프트웨어 디자인 패턴 중 하나로 주로 싱글톤 패턴에서 멀티쓰레드 환경에서의 성능을 높이기 위해서 사용되는 방법이다. 이미 초기화된 경우에는 락을 획득하지 않고 바로 반환해하고, 초기화 되지 않은 경우에만 락을 획득해 초기화를 진행하는 방법으로 성능을 높인다.
 
 ```java
 public class MySingleton {
