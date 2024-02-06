@@ -41,6 +41,7 @@
 
 ## ✔️Network
 - [TCP와 UDP의 특징과 차이](https://github.com/princenim/TIL/blob/master/Network/TCP%EC%99%80%20UDP%EC%9D%98%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EC%B0%A8%EC%9D%B4.md)
+- [HTTPS의 동작 원리](https://github.com/princenim/TIL/blob/master/Network/HTTPS%EC%9D%98%20%EB%8F%99%EC%9E%91%20%EC%9B%90%EB%A6%AC.md)
 - [프록시 서버](https://github.com/princenim/TIL/blob/master/Network/Proxy%20Server.md)
 - [SSH](https://github.com/princenim/TIL/blob/master/Network/SSH.md)
 - [hosts 파일](https://github.com/princenim/TIL/blob/master/Network/hosts%20%ED%8C%8C%EC%9D%BC.md)
