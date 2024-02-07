@@ -27,7 +27,7 @@
 
 두 클래스는 String 클래스와 다르게 `가변(mutable)` 객체이다. 객체의 공간이 부족할때 버퍼의 크기를 유연하게 늘려 저장한다는 의미이다. 값이 변경될때 `String` 객체와 같이 새로운 객체를 만들지 않고 기존 객체내에서 문자열의 크기를 변경하기 때문에 문자열의 추가, 수정, 삭제할때 사용할때 이점이 있다.
 
-두 클래스는 모두 같은 메소드를 가지고 있는데 한가지 차이점이 있다 `**StringBuffer`는 멀티 쓰레드에 안전하고 ,  `StringBuilder`은 멀티쓰레드에 안전하지 않다.**
+두 클래스는 모두 같은 메소드를 가지고 있는데 한가지 차이점이 있다 `StringBuffer`는 멀티 쓰레드에 안전하고 ,  `StringBuilder`은 멀티쓰레드에 안전하지 않다.
 
 ## 2.1 StringBuffer
 
@@ -36,6 +36,98 @@
 ## 2.2 StringBuilder
 
 `StringBuilder`는 `StringBuffer`와는 다르게 멀티쓰레드에 안전하지 않다. 하지만 단일쓰레드 환경에서는 속도가 더 빠르게 때문에 동기화를 고려하지 않는 환경에서 사용하는 것이 좋다.
+그리고 `StringBuilder`의 객체는 `String` 처럼 `String constant pool`을 사용하지 않고 `heap` 영역에 저장된다.
+
+그렇다면 `StringBuilder`은 연산할때 어떻게 동적으로 크기를 늘리고 `String`보다 빠를까?
+
+### 동작 원리
+
+**`StringBuilder`은 내부적으로 `ArrayList`와 같은 원리로 크기가 동적으로 늘어난다.**
+
+```java
+StringBuilder sb = new StringBuilder("Hello"); 
+System.out.println(sb.capacity()); //21
+```
+
+기본적으로 `StringBuilder` 객체 생성 시 내부적으로 `default capacity`가  `16 bytes`의 버퍼 크기를 가진다. 따라서 `16 + 5`해서 `21`의 용량을 가진다.
+
+```java
+sb = sb.append("World"); 
+System.out.println(sb.capacity()); //21
+```
+
+만약 해당 `StringBuilder`에 크기가 `5`인 문자열을 추가해도 용량은 그대로 `21`이다. 이는 `StringBuilder`이 기존 남은 용량(= `16`)을 사용했다는 의미이다.
+
+그렇다면 만약에 `16` 이상의 문자열을 더하면 어떻게 될까?
+
+```java
+
+sb = sb.append("WorldWorldWorldhh"); //길이가 17인 문자열을 더함
+System.out.println(sb.capacity()); //44
+```
+
+이때는 남은 용량인 16을 넘어가 `(기존 용량 크기 + 1) * 2` 즉 `(21 +1) * 2 = 44`의 용량을 가진 문자열이된다.
+
+즉 `StringBuilder`은 `ArrayList`처럼 갖고있는 버퍼 용량이 찼을 때 새로운 용량의 크기를 늘려 새로운 공간에 할당하는것을 알 수 있다.
+
+다음은 `JDK16`의 `StringBuilder` 코드이다.
+
+```java
+@IntrinsicCandidate
+    public StringBuilder() {
+        super(16); //default caapcity
+  }
+
+AbstractStringBuilder(int capacity) {
+        if (COMPACT_STRINGS) {
+            value = new byte[capacity];
+            coder = LATIN1;
+        } else {
+            value = StringUTF16.newBytesFor(capacity);
+            coder = UTF16;
+        }
+    }
+```
+
+`StringBuilder` 생성 시 용량이 `16`인 `byte 배열`이 내부적으로 생성됨을 알 수 있다.
+
+```java
+public AbstractStringBuilder append(String str) {
+        if (str == null) {
+            return appendNull();
+        }
+        int len = str.length();
+        ensureCapacityInternal(count + len); 
+        putStringAt(count, str);
+        count += len;
+        return this;
+    }
+```
+
+```java
+/**
+     * For positive values of {@code minimumCapacity}, this method
+     * behaves like {@code ensureCapacity}, however it is never
+     * synchronized.
+     * If {@code minimumCapacity} is non positive due to numeric
+     * overflow, this method throws {@code OutOfMemoryError}.
+     */
+    private void ensureCapacityInternal(int minimumCapacity) {
+        // overflow-conscious code
+        int oldCapacity = value.length >> coder;
+        if (minimumCapacity - oldCapacity > 0) {
+            value = Arrays.copyOf(value, //value는 byte[], 새로만든 byte[]에 복사후 리턴
+                    newCapacity(minimumCapacity) << coder);
+        }
+    }
+```
+
+그리고 `append()`메소드 호출 했을 때 `minimumCapacity- oldCapacity` 이 0보다 클때 즉, `minimumCapacity (count + 새로운 문자열의 길이)` 가 기존의 `byte[]`의 길이보다 길다면 기존 `byte[]`에 추가하지 못하고 새로운 `byte[]`만들어야하니 `(기존용량 크기 + 1) * 2`배의 용량의 `byte[]`을 만들어 복사한다.
+
+- `Arrays.copyOf(원본배열, 복사할길이)` : 원본 배열을 0부터 원하는 길이만큼 복사한다.
+- `count` : 현재 `byte[]`의 사이즈
+- `miminumCapacity`: 최소한으로 필요한 용량,
+- `oldCapacity` : 기존 용량크기
 
 # 3. 정리
 
