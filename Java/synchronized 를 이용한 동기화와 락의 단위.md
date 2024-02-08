@@ -211,7 +211,7 @@ private void syncBlockMethod1(String msg) {
 
 클래스의 모든 인스턴스가 각자의 `lock`를 가진다.
 
-1. **Class level lock**
+2. **Class level lock**
 
 ```java
 private void syncBlockMethod1(String msg) {
@@ -223,7 +223,7 @@ private void syncBlockMethod1(String msg) {
 클래스의 인스턴스가 여러개 있어도 하나의 lock을 가진다.  클래스 하나당 하나의 lock을 가질 수 있다.   예를들어 위의 예제에서 `Block1` 이라는 클래스의 객체를 수십개 만들었을 때 모든 객체에 대해서 동일한 락을 하나만 주고싶을 때 사용한다. 즉  클래스 레벨이 객체레벨보다 더 범위가 크다 .
 
 ```java
-public class Block2 implements Runnable {
+public class Block3 implements Runnable {
 
     @Override
     public void run() {
@@ -231,24 +231,26 @@ public class Block2 implements Runnable {
     }
 
     private void syncBlockMethod1() {
-        synchronized (Block2.class) { //Class level lock 
+        synchronized (Block3.class) { //Class level lock
 
             System.out.println("in block " + Thread.currentThread().getName() + " 시작");
-            System.out.println("in block " + Thread.currentThread().getName() + " 끝");
+
             try {
                 TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            System.out.println("in block " + Thread.currentThread().getName() + " 끝");
         }
     }
 
     public static void main(String[] args) {
-        Block2 block1 = new Block2();
+        Block3 block1 = new Block3();
         Thread thread1 = new Thread(block1);
         Thread thread2 = new Thread(block1);
 
-        Block2 block2 = new Block2();
+        Block3 block2 = new Block3();
         Thread thread3 = new Thread(block2);
 
         //쓰레드 이름
@@ -265,14 +267,14 @@ public class Block2 implements Runnable {
 ```
 
 ```java
-in block thread3 시작
 in block thread1 시작
-in block thread3 끝
 in block thread1 끝
+in block thread3 시작
+in block thread3 끝
 in block thread2 시작
 in block thread2 끝
 ```
 
-위의 코드는 `클래스 레벨의 락`을 사용한 예제이다.  `Block`이라는 클래스의 인스턴스 `block1`,`block2` 2개를 생성했지만 락이 클래스 레벨로 설정되어 모두 같은 락을 갖게되어서 순서대로 시행되는 결과가 나왔다.
+위의 코드는 `클래스 레벨의 락`을 사용한 예제이다.  `Block3`이라는 클래스의 인스턴스 `block1`,`block2` 2개를 생성했지만 락이 클래스 레벨로 설정되어 모두 같은 락을 갖게되어서 순서대로 시행되는 결과가 나왔다.
 
 만약에 위의 코드를 단순히 `this`로 바꾸면 인스턴스마다 다른 객체를 갖게되어 서로 다른 락을 갖게되고 순서대로 실행하지 않는다.
