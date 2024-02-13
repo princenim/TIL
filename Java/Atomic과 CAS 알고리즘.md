@@ -111,7 +111,7 @@ public class AtomicIntegerExample {
 
 이렇게 `AtomicInteger`를 사용하면 멀티쓰레드 환경에서 안전하게 정수값을 다룰 수 있다.
 
-### 주요 메소드
+## 3.1 주요 메소드
 
 - `AtomicInteger` : `AtomicInteger` 클래스의 생성자로 초기값을 할당 할 수 있다. 이때 값은 `valatile` 로 선언되었는데 그 이유는 `AtomicInteger` 은 원자적인 연산을 보장하는데 이때 연산을 하는 변수값들이 `valatile` 로 인해 항상 메모리에서 값을 확실하게 읽어올 수 있도록 해준다.
 
@@ -167,3 +167,5 @@ public class AtomicIntegerExample {
 ```
 
 더 다양한 메소드는 링크에서 확인 가능하다.
+
+- [Java Development Kit Version 17 API Specification](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html)
