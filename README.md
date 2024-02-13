@@ -21,7 +21,7 @@
 - [HashMap은 어떻게 동작할까?](https://github.com/princenim/TIL/blob/master/Java/HashMap%EC%9D%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EB%8F%99%EC%9E%91%ED%95%A0%EA%B9%8C%3F.md)
 - [가시성과 원자성](https://github.com/princenim/TIL/blob/master/Java/%EA%B0%80%EC%8B%9C%EC%84%B1%EA%B3%BC%20%EC%9B%90%EC%9E%90%EC%84%B1.md)
 - [Double-Checked Locking](https://github.com/princenim/TIL/blob/master/Java/Double-Cheked%20Locking.md)
-- [CAS 알고리즘과 Atomic](https://github.com/princenim/TIL/blob/master/Java/CAS%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EA%B3%BC%20Atomic.md)
+- [Atomic과 CAS 알고리즘](https://github.com/princenim/TIL/blob/master/Java/Atomic%EA%B3%BC%20CAS%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 - [synchronized를 이용한 동기화와 락의 단위](https://github.com/princenim/TIL/blob/master/Java/synchronized%20%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EB%8F%99%EA%B8%B0%ED%99%94%EC%99%80%20%EB%9D%BD%EC%9D%98%20%EB%8B%A8%EC%9C%84.md)
 
 
