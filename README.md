@@ -27,6 +27,7 @@
 - [Concurrent 패키지의 atomic과 locks](https://github.com/princenim/TIL/blob/master/Java/Concurrent%20%ED%8C%A8%ED%82%A4%EC%A7%80%EC%9D%98%20atomic%EA%B3%BC%20locks.md)
 - [I/O의 stream과 buffer](https://github.com/princenim/TIL/blob/master/Java/IO%EC%9D%98%20stream%EA%B3%BC%20buffer.md)
 - [Comparable과 Comparator의 차이점](https://github.com/princenim/TIL/blob/master/Java/Comparable%EA%B3%BC%20Comparator%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
+- [서블릿(servlet)과 WAS(Web Application Server)](https://github.com/princenim/TIL/blob/master/Java/%EC%84%9C%EB%B8%94%EB%A6%BF(sevlet)%EA%B3%BC%20WAS(Web%20Application%20Server).md)
 
 
 
