@@ -66,6 +66,7 @@
 - [이진탐색](https://github.com/princenim/TIL/blob/master/Algorithm/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89.md)
 - [그리디 알고리즘](https://github.com/princenim/TIL/blob/master/Algorithm/%EA%B7%B8%EB%A6%AC%EB%94%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
  - [재귀 알고리즘과 피보나치 수열](https://github.com/princenim/TIL/blob/master/Algorithm/%EC%9E%AC%EA%B7%80%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EA%B3%BC%20%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98%20%EC%88%98%EC%97%B4.md)
+ - [그래프 탐색 - BFS와 DFS](https://github.com/princenim/TIL/blob/master/Algorithm/%EA%B7%B8%EB%9E%98%ED%94%84%20%ED%83%90%EC%83%89%20-%20BFS%2C%20DFS.md)
  - [동적계획법(Dynamic Programming, DP)](https://github.com/princenim/TIL/blob/master/Algorithm/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95(Dynamic%20Programming%2C%20DP).md)
 
 ## ✔️Web
