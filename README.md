@@ -47,7 +47,8 @@
 - [Volume2](https://github.com/princenim/TIL/tree/master/Java/%EC%9E%90%EB%B0%94%EC%9D%98%EC%8B%A0/Volume2)
  
 
-## ✔️Network
+## ✔️ Network
+- [OSI 모델과 TCP/IP 모델](https://github.com/princenim/TIL/blob/master/Network/OSI%20%EB%AA%A8%EB%8D%B8%EA%B3%BC%20TCP%2CIP%EB%AA%A8%EB%8D%B8.md#osi-%EB%AA%A8%EB%8D%B8%EA%B3%BC-tcpip-%EB%AA%A8%EB%8D%B8)
 - [TCP와 UDP의 특징과 차이](https://github.com/princenim/TIL/blob/master/Network/TCP%EC%99%80%20UDP%EC%9D%98%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EC%B0%A8%EC%9D%B4.md)
 - [HTTPS의 동작 원리](https://github.com/princenim/TIL/blob/master/Network/HTTPS%EC%9D%98%20%EB%8F%99%EC%9E%91%20%EC%9B%90%EB%A6%AC.md)
 - [프록시 서버](https://github.com/princenim/TIL/blob/master/Network/Proxy%20Server.md)
