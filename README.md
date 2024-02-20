@@ -69,6 +69,7 @@
  - [동적계획법(Dynamic Programming, DP)](https://github.com/princenim/TIL/blob/master/Algorithm/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95(Dynamic%20Programming%2C%20DP).md)
 
 ## ✔️Web
+- [CORS(Cross Origin Resource Sharing)](https://github.com/princenim/TIL/blob/master/Web/CORS(Cross%20Origin%20Resource%20Sharing).md)
 - [OAuth 2.0](https://github.com/princenim/TIL/blob/master/Web/OAuth%202.0.md)
 
 
