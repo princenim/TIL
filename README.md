@@ -51,6 +51,7 @@
 - [OSI 모델과 TCP/IP 모델](https://github.com/princenim/TIL/blob/master/Network/OSI%20%EB%AA%A8%EB%8D%B8%EA%B3%BC%20TCP%2CIP%EB%AA%A8%EB%8D%B8.md#osi-%EB%AA%A8%EB%8D%B8%EA%B3%BC-tcpip-%EB%AA%A8%EB%8D%B8)
 - [TCP와 UDP의 특징과 차이](https://github.com/princenim/TIL/blob/master/Network/TCP%EC%99%80%20UDP%EC%9D%98%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EC%B0%A8%EC%9D%B4.md)
 - [HTTPS의 동작 원리](https://github.com/princenim/TIL/blob/master/Network/HTTPS%EC%9D%98%20%EB%8F%99%EC%9E%91%20%EC%9B%90%EB%A6%AC.md)
+- [로드밸런서(Load Balancer)](https://github.com/princenim/TIL/blob/master/Network/%EB%A1%9C%EB%93%9C%EB%B0%B8%EB%9F%B0%EC%84%9C(Load%20Balancer).md)
 - [프록시 서버](https://github.com/princenim/TIL/blob/master/Network/Proxy%20Server.md)
 - [SSH](https://github.com/princenim/TIL/blob/master/Network/SSH.md)
 - [hosts 파일](https://github.com/princenim/TIL/blob/master/Network/hosts%20%ED%8C%8C%EC%9D%BC.md)
