@@ -1,4 +1,4 @@
-# *📌* Interface 와 abstract class의 용도의 차이
+# 📌 Interface와 abstract class 용도의 차이
 
 `인터페이스`와 `추상클래스`는 객체 지향 프로그래밍에서 `다형성`과 `재사용성`을 강화하기 위해 사용하는 개념이다.
 
