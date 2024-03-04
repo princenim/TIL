@@ -60,6 +60,7 @@
 
 ## ✔️운영체제
 - [프로세스와 쓰레드의 차이점](https://github.com/princenim/TIL/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
+- [동기와 비동기 / 블로킹과 논블로킹의 차이](https://github.com/princenim/TIL/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20/%EB%8F%99%EA%B8%B0%EC%99%80%20%EB%B9%84%EB%8F%99%EA%B8%B0%2C%20%EB%B8%94%EB%A1%9C%ED%82%B9%EA%B3%BC%20%EB%85%BC%EB%B8%94%EB%A1%9C%ED%82%B9%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
 
 
 ## ✔️Algorithm 
