@@ -8,6 +8,8 @@
 
 자바에서 입출력을 수행하려면 즉 어느 한쪽에서 다른 쪽으로 데이터를 전달하려면 두 대상을 연결하고 데이터를 전송할 수 있는 무언가가 필요한데 이것을 `스트림(stream)`이라고 정의했다. 즉, **스트림(stream)이란 데이터를 운반하는데 사용되는 연결통로이다.**
 
+데이터를 보내는 쪽과 받는쪽이 둘다 스트림에 연결되어있을때 데이터를 주는 쪽에 데이터를 보내는 동안 받는 쪽은 데이터를 받아서 처리하는 작업을 진행하며 이 작업동안은 다른 작업을 진행할 수없다. 따라서 이는 blocking이다.
+
 ![stream](https://github.com/princenim/TIL/assets/59499600/fa2ee54f-3cec-4433-a32e-e93a417cee28)
 
 물이 한쪽으로만 흐르는 것과 같이 스트림은 단방향 통신만 가능하기 때문에 하나의 스트림으로 입력과 출력을 동시에 처리할 수 없다. 그래서 입력과 출력을 동시에 수행하려면 입력을 위한 `입력스트림(input stream)`, 출력을 위한 `출력스트림(output stream)` 모두 2개의 스트림이 필요하다. 스트림은 먼저 보낸 데이터를 먼저 받게 되어 있으며 중간에 건너뀜 없이 연속적으로 데이터를 주고받는다. 큐와 같이 FIFO 구조로 되어있다고 생각하면된다.
@@ -65,6 +67,15 @@ public class BufferedReaderExample {
 ```
 
 위의 코드는 `BufferedReader`를 사용해 파일에서 텍스트 파일를 읽어오는 예시이다.
+
+```java
+BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+bufferedReader.readLine();
+```
+
+위는 버퍼를 사용해 콘솔에서 입력을 받는 예시이다.
+
+`System.in` 은 콘솔로부터 입력을 받는 `InputStream`, 그리고 `InputStreamReader`는 받은 바이트 스티림을 문자스트림으로 변환한다. 그리고 `BufferedReader`는 문자열을 버퍼를 저장하여 성능을 향상시킨다. 그리고 `readLine` 은 버퍼에 저장된 데이터를 한줄씩 읽는다.  그리고 `readLine` 는 사용자가 입력을 완료할때까지 대기하므로 이 부분에서 `blocking` 상태가 된다.
 
 ## 3.1 버퍼를 사용하는 이유
 
