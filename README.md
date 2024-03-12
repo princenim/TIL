@@ -82,5 +82,6 @@
 
 ## ✔️Database
 - [ERD 다이어그램](https://github.com/princenim/TIL/blob/master/Database/ERD%20%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.md)
+- [CHAR과 VARCHAR의 차이점](https://github.com/princenim/TIL/blob/master/Database/CHAR%EA%B3%BC%20VARCHAR%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
 
 
