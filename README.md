@@ -80,7 +80,7 @@
 - [SQL Injection](https://github.com/princenim/TIL/blob/master/Web/SQL%20Injection.md)
 - [OAuth 2.0](https://github.com/princenim/TIL/blob/master/Web/OAuth%202.0.md)
 
-## ✔️Datebase
+## ✔️Database
 - [ERD 다이어그램](https://github.com/princenim/TIL/blob/master/Database/ERD%20%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.md)
 
 
