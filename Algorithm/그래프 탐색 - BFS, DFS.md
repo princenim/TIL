@@ -48,6 +48,140 @@
 
 즉, 정리하면 메모리 측면에서 인접행렬방식은 모든 관계를 저장하므로 노드개수가 많을수록 불필요하게 낭비된다. 반면에 인접 리스트 방식은 연결된 정보만들 저장하기 때문에 메모리를 효율적으로 사용한다. 하지만 이와 같은 속성때문에 인접리스트 방식은 인접행렬 방식에 비해 특정한 두 노드가 연결되어있는지에 대한 정보를 얻는 속도가 느리다.
 
+
+### 인접리스트 구현하기
+
+- `가중치 없는 무방향 그래프`
+
+<img width="764" alt="1" src="https://github.com/princenim/TIL/assets/59499600/d4c8f52d-44de-4e45-bf89-4fb058827a9b">
+
+`가중치 없는 무방향 그래프`의 노드의 개수는 4개, 간선의 개수는 5개일때,
+
+```java
+
+    /*
+    입력 예시 
+    1 2
+    1 3
+    1 4
+    2 4
+    3 4
+     */
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = 4; //노드의 개수
+        int m = 5; //간선의 개수
+
+        // 인접 리스트 - ArrayList 안에 ArrayList
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        //초기화
+        for (int i = 0; i<=n; i++){
+            graph.add(new ArrayList<>());
+        }
+
+        //입력
+        for(int i =0; i < m ; i++){
+            String[] strArr=  br.readLine().split(" ");
+            int n1 = Integer.parseInt(strArr[0]);
+            int n2 = Integer.parseInt(strArr[1]);
+
+            //(1 2)일 때 1번에 2번 연결 , 2번에 1번 연결
+            graph.get(n1).add(n2);
+            graph.get(n2).add(n1);
+        }
+
+        //출력
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Node " + i + " is connected to: ");
+            for (int j = 0; j < graph.get(i).size(); j++) {
+                System.out.print(graph.get(i).get(j) + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+//출력 결과
+Node 1 is connected to: 2 3 4 
+Node 2 is connected to: 1 4 
+Node 3 is connected to: 1 4 
+Node 4 is connected to: 1 2 3 
+```
+
+- `가중치 있는 방향 그래프`
+
+<img width="752" alt="2" src="https://github.com/princenim/TIL/assets/59499600/b3bcc6ff-e1a8-44cf-afbd-87c8388c4d3a">
+
+
+```java
+public class GraphTest {
+
+    /*
+    입력 예시
+    1 2 2
+    1 3 2
+    1 4 2
+    2 4 2
+    3 4 2
+     */
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = 4; //노드의 개수
+        int m = 5; //간선의 개수
+
+        // 인접 리스트 - ArrayList 안에 ArrayList
+        ArrayList<ArrayList<Node>> graph = new ArrayList<>();
+        //초기화
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        //입력
+        for (int i = 0; i < m; i++) {
+            String[] strArr = br.readLine()
+                                .split(" ");
+            int from = Integer.parseInt(strArr[0]); //from 노드에서 to노드로 가중치만큼
+            int to = Integer.parseInt(strArr[1]);
+            int weight = Integer.parseInt(strArr[2]);
+
+            graph.get(from)
+                 .add(new Node(to, weight));
+        }
+
+        //출력
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Node " + i + " is connected to: ");
+
+            for (Node node : graph.get(i)) {
+                System.out.print(node.to + "(Weight: " + node.weight + ") ");
+            }
+            System.out.println()
+        }
+    }
+
+    static class Node {
+
+        int to; // 도착 노드
+        int weight; // 가중치
+
+        Node(int to, int weight) {
+            this.to = to;
+            this.weight = weight;
+        }
+    }
+}
+
+//출력 결과 
+
+Node 0 is connected to: 
+Node 1 is connected to: 2(Weight: 2) 3(Weight: 3) 4(Weight: 2) 
+Node 2 is connected to: 4(Weight: 4) 
+Node 3 is connected to: 4(Weight: 5) 
+Node 4 is connected to: 
+```
+
 # 2. BFS 와 DFS
 
 ![gs5](https://github.com/princenim/TIL/assets/59499600/9e411b4d-4ed6-41cf-a4d6-7839af26aeda)
