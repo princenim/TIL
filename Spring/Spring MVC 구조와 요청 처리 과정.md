@@ -1,4 +1,4 @@
-# 📌 Spring MVC의 요청 처리 과정
+# 📌 Spring MVC 구조와 요청 처리 과정
 
 먼저 Spring MVC를 알기전에 `MVC 패턴`을 알아야한다.
 
