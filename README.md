@@ -48,10 +48,10 @@
 - [Volume2](https://github.com/princenim/TIL/tree/master/Java/%EC%9E%90%EB%B0%94%EC%9D%98%EC%8B%A0/Volume2)
 
 ## ✔️ Spring
-- [Spring MVC 구조와 요청 처리 과정](https://github.com/princenim/TIL/blob/master/Spring/Spring%20MVC%EC%9D%98%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%9A%94%EC%B2%AD%20%EC%B2%98%EB%A6%AC%20%EA%B3%BC%EC%A0%95.md)
+- [Spring MVC 구조와 요청 처리 과정](https://github.com/princenim/TIL/blob/master/Spring/Spring%20MVC%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%9A%94%EC%B2%AD%20%EC%B2%98%EB%A6%AC%20%EA%B3%BC%EC%A0%95.md)
+- [Mybatis 개념과 동작원리](https://github.com/princenim/TIL/blob/master/Spring/Mybatis%20%EA%B0%9C%EB%85%90%EA%B3%BC%20%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC.md)
 ###  김영한의 스프링 완전정복
 - [스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술](https://github.com/princenim/TIL/blob/master/Spring/%EA%B9%80%EC%98%81%ED%95%9C%EC%9D%98%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EC%99%84%EC%A0%84%20%EC%A0%95%EB%B3%B5/01.%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EC%9E%85%EB%AC%B8%20-%20%EC%BD%94%EB%93%9C%EB%A1%9C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%2C%20%EC%9B%B9%20MVC%2C%20DB%20%EC%A0%91%EA%B7%BC%20%EA%B8%B0%EC%88%A0.md)
-- [Mybatis 개념과 동작원리](https://github.com/princenim/TIL/blob/master/Spring/Mybatis%20%EA%B0%9C%EB%85%90%EA%B3%BC%20%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC.md)
 
 
  
