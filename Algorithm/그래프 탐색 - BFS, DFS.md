@@ -286,6 +286,7 @@ public class BFS {
 ## 2.2 DFS (깊이 우선 탐색, Depth-First Search)
 
 `DFS`은 깊게 탐색한다는 의미로 루트 노트에서 시작해 최대한 깊숙히 들어가 확인한 뒤 다시 돌아가 다른 루트로 탐색하는 방식이다. 즉 다음 분기로 넘어가기 전에 해당 분기를 완벽하게 탐색한다.
+(한 루트에 연결된 노드를 최대한 깊이 탐색한다는 의미로 더 이상 진행할 수 없을때까지 계속해서 탐색을 진행한다.)
 
 ### 동작과정
 
@@ -307,82 +308,82 @@ public class BFS {
 6. 스택에 최상단 노드인 7에 방문하지 않은 인접 노드 8이 있다. 8을 스택에 넣고 방문처리를 한다.
 7. 이렇게 방문하지 않은 노드가 없을때까지 반복한다.
 
-결과적으로 노드의 탐색 순서(스택에 들어간순서)는 `1→ 2 → 7 →6 →8 →3 →4 →5` 가 된다.
+결과적으로 노드의 탐색 순서(스택에 들어간순서)는 `1→ 2 → 7 → 6 → 8 → 3 → 4 → 5` 가 된다.
 
 `DFS`는 스택을 사용하는 알고리즘이기 때문에 실제 구현은 `재귀함수`를 사용했을때 간결하게 구현할 수 있다. 밑은 간결하게 구현한 예시이다.
 
-### Java Code
+### Java Code - 재귀를 이용한 DFS
+
+위의 예제를 코드로 표현하면 다음과같다.
 
 ```java
-public class DFSExample {
+public class DFSTest {
 
-    public static boolean[] visited = new boolean[9];
-    public static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    /*
+    입력
+    8 9 1 
+    1 2 
+    2 7
+    6 7
+    7 8
+    1 8
+    1 3
+    3 4
+    3 5
+    4 5
+     */
 
-    public static void dfs(int x) {
-        //현재 방문한 노드 처리
-        visited[x] = true;
-        System.out.print(x + " ");
-        for (int i = 0; i < graph.get(x).size(); i++) {
-            //System.out.println("x "+ x);
-            int y = graph.get(x).get(i);
-            //System.out.println("y " + y);
-            if (!visited[y]) { //방문처리안했을때
-                dfs(y);
-            }
-        }
-    }
+    //방문처리할 배열
+    static boolean[] visited;
+    //그래프를 담을 연결 리스트
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 
-    public static void main(String[] args) {
-        // 그래프 초기화
-        for (int i = 0; i < 9; i++) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine()); //문자열을 쪼개줌
+
+        int n = Integer.parseInt(st.nextToken()); //정점
+        int m = Integer.parseInt(st.nextToken()); //간선
+        int v = Integer.parseInt(st.nextToken()); //시작 번호
+
+        visited = new boolean[m];
+
+        //1. 입력값을 통해 그래프를 만들기 - 무방향 인접리스트
+        for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
 
-        // 노드 1에 연결된 노드 정보 저장
-        graph.get(1).add(2);
-        graph.get(1).add(3);
-        graph.get(1).add(8);
+        for (int i = 1; i <= m; i++) { //간선의 갯수만큼
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            graph.get(a)
+                 .add(b);
+            graph.get(b)
+                 .add(a);
+        }
 
-        // 노드 2에 연결된 노드 정보 저장
-        graph.get(2).add(1);
-        graph.get(2).add(7);
-
-        // 노드 3에 연결된 노드 정보 저장
-        graph.get(3).add(1);
-        graph.get(3).add(4);
-        graph.get(3).add(5);
-
-        // 노드 4에 연결된 노드 정보 저장
-        graph.get(4).add(3);
-        graph.get(4).add(5);
-
-        // 노드 5에 연결된 노드 정보 저장
-        graph.get(5).add(3);
-        graph.get(5).add(4);
-
-        // 노드 6에 연결된 노드 정보 저장
-        graph.get(6).add(7);
-
-        // 노드 7에 연결된 노드 정보 저장
-        graph.get(7).add(2);
-        graph.get(7).add(6);
-        graph.get(7).add(8);
-
-        // 노드 8에 연결된 노드 정보 저장
-        graph.get(8).add(1);
-        graph.get(8).add(7);
-
-        //각 노드가 연결된 정보를 배열로 표현
         System.out.println(graph);
-        dfs(1);
 
+        dfs(v); //1번 노드부터 시작
+    }
+
+    public static void dfs(int x) {
+        visited[x] = true; //방문처리 
+
+        System.out.print(x + " ");
+        for (int i = 0; i < graph.get(x).size(); i++) {
+            int y = graph.get(x).get(i);
+            if (!visited[y]) { //방문처리 안한 노드만
+                dfs(y);
+            }
+        }
     }
 }
 ```
 
 ### DFS의 특징
 - 미로찾기와 같은 경로 문제에 유용하다.
-- 노드를 방문했는지의 여부를 체크해야한다. 이는 순환 구조에 빠지지 않도록 하는 역할을 한다.
-- 깊은 단계의 노드를 빠르게 탐색할 수 있다. 하지만 최단 경로를 찾지 못할 수 있으며 무한루프테 빠질 가능성이 있다.
-- 스택을 이용하여 구현가능하며 재귀함수를 통해서 구현이 가능하다.
+- 노드를 방문했는지의 여부를 체크해야 한다. 이는 순환 구조에 빠지지 않도록 하는 역할을 한다.
+- 깊은 단계의 노드를 빠르게 탐색할 수 있다. 하지만 최단 경로를 찾지 못할 수 있으며 무한루프에 빠질 가능성이 있다.
+- 스택을 이용하여 구현 가능하며 재귀함수를 통해서 구현이 가능하다.
