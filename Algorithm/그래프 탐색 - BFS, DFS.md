@@ -193,7 +193,7 @@ Node 4 is connected to:
 ### 동작과정
 
 1. 탐색 시작 노드를 큐에 삽입하고 방문 처리를한다.
-2. 큐에서 노드를 꺼내 해당 노드의 인접 노드중에서 방문하지 않은 노드를 모두 큐에 삽입하고 방문 처리를하낟.
+2. 큐에서 노드를 꺼내 해당 노드의 인접 노드중에서 방문하지 않은 노드를 모두 큐에 삽입하고 방문 처리를 한다. 
 3. 위의 과정을 더 이상 수행할 수 없을때까지 반복한다.
 
 ![dfs](https://github.com/princenim/TIL/assets/59499600/235edf34-1b1a-42c4-9b5f-c8ecf53d47fc)
@@ -212,74 +212,82 @@ Node 4 is connected to:
 
 ### Java Code
 
-<img width="512" alt="gs7" src="https://github.com/princenim/TIL/assets/59499600/2fa93e8d-8070-4bae-8b62-5fed90b6e5cd">
-
-위와 같은 그래프가 이진트리가 존재할때 BFS로 순회하여 출력하면 `1 2 3 4 5 6 7` 이 나와야한다.
-
 ```java
-class Node {
-    int data; //값 저장
+public class BFSTest {
+    /* 입력
+    8 9 1
+    1 2
+    1 3
+    1 8
+    2 7
+    7 6
+    7 8
+    3 4
+    3 5
+    4 5
+     */
 
-    Node lt, rt; //왼쪽과 오른쪽 자식의 주소를 저장
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>(); //그래프를 표현할 인접리스트
+    static boolean[] visited; //방문 체크 배열
 
-    public Node(int val) { //생성자
-        this.data = val;
-        lt = rt = null;
-}
-```
+    public static void main(String[] args) throws IOException {
+        //입력
 
-```java
-public class BFS {
-    //BFS는 큐를 사용
-    Node root; //인스턴스 변수는 Heap 영역에 생성됨
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());// 노드
+        int m = Integer.parseInt(st.nextToken());// 간선의 개수
+        int start = Integer.parseInt(st.nextToken());// 시작 노드
 
-    public static void main(String[] args) {
-        //주어진 Tree를 만들기
-        BFS tree = new BFS();
-        tree.root = new Node(1);
-        tree.root.lt = new Node(2);
-        tree.root.rt = new Node(3);
-        tree.root.lt.lt = new Node(4);
-        tree.root.lt.rt = new Node(5);
-        tree.root.rt.lt = new Node(6);
-        tree.root.rt.rt = new Node(7);
+        //그래프 초기화
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<>());
+        }
+        visited = new boolean[m];
 
-        tree.solve();
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            graph.get(a)
+                 .add(b);
+            graph.get(b)
+                 .add(a);
+        }
+        
+        bfs(start);
     }
 
-    public void solve() {
-        Queue<Node> Q = new LinkedList<>();
-        Q.add(root);
-        int level = 0;//레벨
-        while (!Q.isEmpty()) {
-            int len = Q.size();
-            System.out.print(level + " : ");
-            for (int i = 0; i < len; i++) {
-                Node cur = Q.poll();
-                System.out.print(cur.data + " ");
-                if (cur.lt != null) { //꺼내고 넣고
-                    Q.add(cur.lt);
-                }
+    public static void bfs(int start) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(start);
+        visited[start] = true;
 
-                if (cur.rt != null) {
-                    Q.add(cur.rt);
+        while (!q.isEmpty()) {
+            int x = q.poll();
+            System.out.print(x + " ");
+            for (int i = 0; i < graph.get(x)
+                                     .size(); i++) {
+                int y = graph.get(x)
+                             .get(i); //x와 연결된 애들 다 큐애 넣기
+                if (!visited[y]) {
+                    q.add(y); //넣고 방문터리
+                    visited[y] = true;
                 }
             }
-            level++;
-            System.out.println();
         }
     }
-	}
 }
 ```
-
-<img width="711" alt="스크린샷 2024-01-17 오전 10 46 29" src="https://github.com/princenim/TIL/assets/59499600/29667cbc-c104-4850-a6ae-1a169e2eb38d">
 
 ### BFS의 특징
 
-- 최단거리 경로를 찾는데 사용한다.
+- `최단거리 경로`를 찾는데 사용한다.
 - 노드를 방문했는지의 여부를 체크해야한다. 그렇지 않으면 무한루프에 빠질 위험이 있다.
 - 방문한 노드들을 차례대로 저장한 후 꺼낼 수 있는 `Queue`의 자료구조를 이용한다.
+
+
 
 
 
@@ -383,7 +391,7 @@ public class DFSTest {
 ```
 
 ### DFS의 특징
-- 미로찾기와 같은 경로 문제에 유용하다.
+- `미로찾기`와 같은 경로 문제에 유용하다.
 - 노드를 방문했는지의 여부를 체크해야 한다. 이는 순환 구조에 빠지지 않도록 하는 역할을 한다.
 - 깊은 단계의 노드를 빠르게 탐색할 수 있다. 하지만 최단 경로를 찾지 못할 수 있으며 무한루프에 빠질 가능성이 있다.
 - 스택을 이용하여 구현 가능하며 재귀함수를 통해서 구현이 가능하다.
