@@ -97,16 +97,16 @@ public class Student implements Comparator<Student> {
         this.classNumber = classNumber;
     }
 
+    //오름차순
     @Override
     public int compare(Student o1, Student o2) { //매개변수로 들어온 두 객체를 비교
         if (o1.age > o2.age) {
-            return 1;
+            return 1; //1이면 o1이 o2 뒤에 위치 즉, 값 교체
         } else if (o1.age == o2.age) {
-            return 0;
+            return 0; //동일 위치
         } else {
-            return -1;
+            return -1; //동일 위치
         }
-
     }
 }
 ```
@@ -123,12 +123,46 @@ public class Student implements Comparator<Student> {
         this.classNumber = classNumber;
     }
 		
-		@Override
-		public int compare(Student o1, Student o2) {
-	
-			return o1.age - o2.age;
-		}
+    @Override
+    public int compare(Student o1, Student o2) {
+
+        return o1.age - o2.age; //오름차순
+    }
 }
 ```
 
 만약 `o1`의 `age`가 `o2`의 `age`보다 크다면 양수가 반환 될 것이고 같다면 0을, 작다면 음수를 반환한다. 그리고 `Compaable` 처럼 값 차를 통해 값을 비교하면 오버플로우가 발생할 가능성이 있으므로 주의해야한다.
+
+```java
+public class CompareExample {
+
+    public static void main(String[] args) {
+        
+        Integer[] arr = {1,2,3,4,5};
+        Arrays.sort(arr, new Comparator<>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;  //오름차순 o1이 1, o2가 2일때 1-2=-1이므로 0보다 작다. 따라서 자리 교체 X
+            } //출력 : 1,2,3,4,5
+        });
+
+        System.out.println(Arrays.toString(arr));
+
+        Arrays.sort(arr, new Comparator<>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;  //내림차순 o1이 1, o2가 2일때 2-1=1이므로 0보다 크다. 따라서 두 요소 교체
+            } //출력 : 1,2,3,4,5
+        });
+        
+        //람다로도 가능
+        Arrays.sort(arr, (o1, o2) -> o2 - o1);
+
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+또한 다음과 같이 정렬하고 싶은 배열 내부에 `Comparator` 의 익명 내부 클래스를 사용할 수 있다. 익명 내부 클래스는 인터페이스를 구현하거나 추상 클래스를 상속하여 이름 없는 클래스를 만들 때 사용하는 방법이다.
+
+그리고 더 간결하게는 람다로도 가능하다.
