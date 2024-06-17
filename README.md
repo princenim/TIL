@@ -28,7 +28,7 @@
 - [Double-Checked Locking](https://github.com/princenim/TIL/blob/master/Java/Double-Cheked%20Locking.md)
 - [Atomic과 CAS 알고리즘](https://github.com/princenim/TIL/blob/master/Java/Atomic%EA%B3%BC%20CAS%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 - [Concurrent 패키지의 atomic과 locks](https://github.com/princenim/TIL/blob/master/Java/Concurrent%20%ED%8C%A8%ED%82%A4%EC%A7%80%EC%9D%98%20atomic%EA%B3%BC%20locks.md)
-- [HashTable, ConcurrentHashMap,SynchronizedMap의 특징과 차이점](https://github.com/princenim/TIL/blob/master/Java/ConcurrentHashMap%EA%B3%BC%20SynchronizedMap%EC%9D%98%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
+- [HashTable, ConcurrentHashMap, SynchronizedMap의 특징과 차이점](https://github.com/princenim/TIL/blob/master/Java/HashTable%2C%20ConcurrentHashMap%2CSynchronizedMap%EC%9D%98%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
 - [I/O의 stream과 buffer](https://github.com/princenim/TIL/blob/master/Java/IO%EC%9D%98%20stream%EA%B3%BC%20buffer.md)
 - [Comparable과 Comparator의 차이점](https://github.com/princenim/TIL/blob/master/Java/Comparable%EA%B3%BC%20Comparator%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
 - [Interface와 abstract class 용도의 차이 ](https://github.com/princenim/TIL/blob/master/Java/Interface%EC%99%80%20abstract%20class%20%EC%9A%A9%EB%8F%84%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
