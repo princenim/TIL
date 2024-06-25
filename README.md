@@ -84,14 +84,16 @@
  - [Heap과 Priority Queue](https://github.com/princenim/TIL/blob/master/Algorithm/Heap%EA%B3%BC%20Priority%20Queue.md)
  - [그래프 알고리즘 - 서로소 집합과 유니온파인드 ](https://github.com/princenim/TIL/blob/master/Algorithm/%EA%B7%B8%EB%9E%98%ED%94%84%20-%20%EC%84%9C%EB%A1%9C%EC%86%8C%20%EC%A7%91%ED%95%A9%20%26%20%EC%9C%A0%EB%8B%88%EC%98%A8%ED%8C%8C%EC%9D%B8%EB%93%9C.md)
  - [그래프 알고리즘 - 크루스칼 알고리즘](https://github.com/princenim/TIL/blob/master/Algorithm/%EA%B7%B8%EB%9E%98%ED%94%84%20-%20%ED%81%AC%EB%A3%A8%EC%8A%A4%EC%B9%BC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
+ - [LRU(Least Recently Used) 캐시 알고리즘](https://github.com/princenim/TIL/blob/master/Algorithm/LRU(Least%20Recently%20Used)%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 
-## ✔️Web
+
+## ✔️ Web
 - [CORS(Cross Origin Resource Sharing)](https://github.com/princenim/TIL/blob/master/Web/CORS(Cross%20Origin%20Resource%20Sharing).md)
 - [XSS와 CSRF 특징과 방지 대책](https://github.com/princenim/TIL/blob/master/Web/XSS%EC%99%80%20CSRF%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EB%B0%A9%EC%A7%80%20%EB%8C%80%EC%B1%85.md)
 - [SQL Injection](https://github.com/princenim/TIL/blob/master/Web/SQL%20Injection.md)
 - [OAuth 2.0](https://github.com/princenim/TIL/blob/master/Web/OAuth%202.0.md)
 
-## ✔️Database
+## ✔️ Database
 - [낙관적 락과 비관적 락](https://github.com/princenim/TIL/blob/master/Database/%EB%82%99%EA%B4%80%EC%A0%81%20%EB%9D%BD%EA%B3%BC%20%EB%B9%84%EA%B4%80%EC%A0%81%20%EB%9D%BD.md)
 - [ERD 다이어그램](https://github.com/princenim/TIL/blob/master/Database/ERD%20%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.md)
 - [CHAR과 VARCHAR의 차이점](https://github.com/princenim/TIL/blob/master/Database/CHAR%EA%B3%BC%20VARCHAR%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
