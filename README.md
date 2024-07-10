@@ -99,5 +99,6 @@
 - [CHAR과 VARCHAR의 차이점](https://github.com/princenim/TIL/blob/master/Database/CHAR%EA%B3%BC%20VARCHAR%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
 - [DATE, DATETIME, TIMESTAMP의 차이점](https://github.com/princenim/TIL/blob/master/Database/DATE%2C%20DATETIME%2C%20TIMESTAMP%20%EC%B0%A8%EC%9D%B4%EC%A0%90.md)
 - [데이터베이스 샤딩(Sharding)](https://github.com/princenim/TIL/blob/master/Database/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EC%83%A4%EB%94%A9(Sharding).md)
+- [Redis의 Standalone & Cluster & Sentinel](https://github.com/princenim/TIL/blob/master/Database/Redis%EC%9D%98%20Standalone%20%26%20Cluster%20%26%20Sentinel.md)
 
 
