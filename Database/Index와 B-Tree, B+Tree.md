@@ -1,4 +1,4 @@
-# 📌 mysql Index와 B-Tree, B+Tree
+# 📌 Index와 B-Tree, B+Tree
 
 # 1. 인덱스란?
 
