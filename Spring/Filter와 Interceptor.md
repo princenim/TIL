@@ -269,3 +269,92 @@ public class WebConfig implements WebMvcConfigurer {
 ```
 
 그리고 인터셉터의 URL 경로는 필터에서 제공하는 URL경로보다 더 정밀하게 설정할 수 있다.
+
+# 3. 필터와 인터셉터 차이점
+
+|  | 필터 | 인터셉터 |
+| --- | --- | --- |
+| 관리되는 컨테이너 | 서블릿 컨테이너 | 스프링 컨테이너 |
+| 스프링의 예외처리 여부 | X | O |
+| Request/Response 객체 조작 가능 여부 | O | X |
+
+### 스프링의 예외 처리 여부
+
+일반적으로 스프링은 `ControllerAdvice`와 `ExceptionHandler`를 이용한 예외 처리 기능을 주로 사용한다.  만약 로직에서 `MemberNotFoundException`를 던져 404로 응답을 반환하길 원한다면 다음과 같이 구현할 것이고, 해당 예외가 발생했을 때 예외는 서블릿까지 전달되지 않고 `GlobalExceptionHandler`  내에서 처리어 클라이언트에게 반환된다.
+
+```java
+@RestControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    public ResponseEntity<Object> handleMyException(MemberNotFoundException e) {
+        return ResponseEntity.notFound().build();
+    }
+    ...
+}
+```
+
+하지만 필터에서 발생한 예외는 스프링 컨텍스트에 도달하지 않고 서블릿 레벨에서 처리된다. 따라서 필터에 던져진 예외는 위의 `@RestControllerAdvice` 에 의해 처리되지 않고, 결과적으로 예외를 핸들링하지 못해 500 Internal Server Error를 반환한다. 하지만 인터셉터는 스프링 컨테이너에 의해 수행되기 때문에 예외가 캐치된다.
+
+```java
+public class MyFilter implements Filter {
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletResponse servletResponse = (HttpServletResponse) response;
+        servletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        servletResponse.getWriter().print("Member Not Found");
+    }
+}
+```
+
+### Request/Response 객체 조작 가능 여부
+
+필터는 Request/Response를 조작할 수 있지만, 인터셉터는 조작할 수 없다. 여기서 조작이란 다른 객체로 바꾼다는 이야기이다.
+
+```java
+public MyFilter implements Filter {
+
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
+        //다음 필터 호출 할때 개발자가 다른 request와 response를 넣어줄 수 있음
+        chain.doFilter(new MockHttpServletRequest(), new MockHttpServletResponse());       
+    }
+    
+}
+```
+
+```java
+public class MyInterceptor implements HandlerInterceptor {
+
+    default boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        // Request/Response를 교체할 수 없고 boolean 값만 반환할 수 있다.
+        return true;
+    }
+}
+```
+
+코드를 보면 필터는 개발자가 다른 request, response를 넣어줄 수 있는 반면에 인터셉터는 true를 반환하면 다음 인터셉터가 호출되거나 컨트롤러로 요청이 전달되고, false라면 컨트롤러 요청이 중단된다. 그리고 Request, Response 객체를 넘겨줄 수도 없다.
+
+# 4. 필터와 인터셉터의 데이터 접근 범위
+
+필터의 경우 `ServletRequest`,  `ServletResponse` 를 가진다. 그리고 인터셉터는 `ServletRequest` , `ServletResponse` 에 추가로 `handler` 를 가진다. `handler`는 요청을 처리한 실제 컨트롤러와 관련된 정보를 포함한다. 일반적으로 컨트롤러 클래스의 메소드와 매핑되어있다. 따라서 보통 메소드 이름, 메소드의 어노테이션, 메소드 매개변수 등의 정보를 갖고있다.
+
+### ServletRequest
+
+`ServletRequest` 은 모든 서블릿 요청의 기본 인터페이스로 클라이언트의 요청 정보를 서블릿으로 넘겨주기 위한 객체이다. 요청이 들어오면 서블릿 컨테이너가 `ServletRequest` 를 생성하고 이 객체를 서블릿의 service의 파라미터로 전달한다. FTP, SMTP등 다른 프로토콜을 사용하는 서블릿에서도 사용할 수 있다.
+
+[ServletRequest](https://javaee.github.io/javaee-spec/javadocs/javax/servlet/ServletRequest.html)
+
+### HttpServletRequest
+
+`HttpServletRequest`는 `ServletRequest` 를 확장한 인터페이스로 HTTP 요청에 특화된 메소드와 기능을 추가한 인터페이스이다. `getHeader`와 `getParameter` , `getMethod`와 같은 HTTP 특화 메소드를 제공한다.
+
+[HttpServletRequest](https://javaee.github.io/javaee-spec/javadocs/javax/servlet/http/HttpServletRequest.html)
+
+### ServletResponse
+
+`ServletResponse` 는 응답을 생성하고 클라이언트로 전송하는데 사용하는 인터페이스로 데이터를 처리하고 응답을 구성하는데 사용한다. ServletResponse를 통해서 HTML페이지, JSON데이터를 생성할 수 있다.
+
+### **HttpServletResponse**
+
+`HttpServletResponse`는 `ServletResponse`을 상속한 인터페이스로 HTTP프로토콜에 특화된 기능을 제공한다. 상태 코드를 설정하거나, 헤더설정, 쿠키관리와 같은 기능을 갖고있다.
